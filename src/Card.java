@@ -46,20 +46,22 @@ public class Card {
     }
 
     public enum Suit {
-        CLUB(1),
-        DIAMOND(2),
-        HEART(3),
-        SPADE(4);
+        CLUB("♣",1),
+        DIAMOND("♦",2),
+        HEART("♥",3),
+        SPADE("♠",4);
 
+        final String symbol;
         final int val;
-        Suit(int val) {
+        Suit(String symbol, int val) {
+            this.symbol = symbol;
             this.val = val;
         }
     }
 
     @Override
     public String toString() {
-        return String.format("{suit: %s, rank: %s}", this.suit.name(), this.rank.name);
+        return String.format("%s%s", this.suit.symbol, this.rank.name);
     }
 
     public Rank getRank() {

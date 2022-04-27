@@ -8,8 +8,18 @@ public class Main {
     public static void main(String[] args) {
         int humanPlayerNumber = 1;
         List<Player> players = initializePlayers(humanPlayerNumber);
-        new GameStart(players);
+        Deck deck = new Deck();
+        System.out.println("遊戲開始!!!!");
+        System.out.println("命名");
+        GameStart.name(players);
+        System.out.println("洗牌");
+        deck.shuffle();
+        System.out.println("抽卡階段!!!!");
+        Draw.drawCard(players, deck);
+        System.out.println("遊戲回合開始!!!!");
         System.out.println(players);
+        System.out.println(deck);
+
     }
 
     private static List<Player> initializePlayers(int humanPlayerNumber) {

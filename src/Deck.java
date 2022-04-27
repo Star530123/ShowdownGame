@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 
 /**
  * @author Simon
  */
 public class Deck {
-    private List<Card> cards;
+    private List<Card> cards = new ArrayList<>();
 
     public Deck() {
         initializeDeck();
@@ -37,5 +38,14 @@ public class Deck {
         Card card = cards.get(cards.size() - 1);
         cards.remove(cards.size() - 1);
         return card;
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner sj = new StringJoiner(",","[","]");
+        for (Card card: cards) {
+            sj.add(card.toString());
+        }
+        return sj.toString();
     }
 }

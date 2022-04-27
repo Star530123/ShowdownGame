@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -14,17 +15,13 @@ public abstract class Player {
     private int exchangePrivilege = 1;
     private Input input;
 
-    public void name() {
-        this.name = this.input.enterWords();
-    }
-
     public Player(Order order, Input input) {
         setOrder(order);
         setInput(input);
     }
 
-    public enum Order{
-        P1(),P2(),P3(),P4()
+    public void name() {
+        name = input.enterWords();
     }
 
     @Override
@@ -34,6 +31,14 @@ public abstract class Player {
             sj.add(card.toString());
         }
         return String.format("{order: %s, name: %s, cards: %s}", this.order.name(), this.name, sj);
+    }
+
+    public void sortCard() {
+        cards.sort(Card::compareTo);
+    }
+
+    public enum Order{
+        P1(),P2(),P3(),P4()
     }
 
     public Order getOrder() {

@@ -5,13 +5,13 @@ import java.util.List;
  */
 public class GameStart {
 
-    public GameStart(List<Player> players) {
-        this.name(players);
-    }
-
-    public void name(List<Player> players) {
+    public static void name(List<Player> players) {
         for (Player player: players) {
+            if (player.getClass().equals(HumanPlayer.class)) {
+                System.out.println(player.getOrder().name() + "玩家請輸入姓名:");
+            }
             player.name();
         }
     }
+
 }
