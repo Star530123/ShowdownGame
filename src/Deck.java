@@ -35,9 +35,7 @@ public class Deck {
 
     public Card drawCard() {
         if (cards.isEmpty()) throw new RuntimeException("牌堆已經沒牌抽囉！");
-        Card card = cards.get(cards.size() - 1);
-        cards.remove(cards.size() - 1);
-        return card;
+        return cards.remove(cards.size() - 1);
     }
 
     @Override
@@ -47,5 +45,9 @@ public class Deck {
             sj.add(card.toString());
         }
         return sj.toString();
+    }
+
+    public List<Card> getCards() {
+        return cards;
     }
 }

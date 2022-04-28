@@ -1,8 +1,11 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.concurrent.Exchanger;
+import java.util.stream.Collectors;
 
 /**
  * @author Simon
@@ -14,14 +17,36 @@ public abstract class Player {
     private int point;
     private int exchangePrivilege = 1;
     private Input input;
+    private Exchange exchange;
 
     public Player(Order order, Input input) {
         setOrder(order);
         setInput(input);
     }
 
-    public void name() {
-        name = input.enterWords();
+    public abstract void name();
+
+    public abstract DoExchange wantToExchangeCard();
+
+    public abstract Player exchangeCardWith(List<Player> players);
+
+    public abstract Card show();
+
+    public void exchangeHands(Player player) {
+        System.out.printf("--> 對象為%s玩家\n", player.order.name());
+        List<Card> targetCards = player.getCards();
+        player.setCards(cards);
+        exchange = new Exchange(this, player);
+        cards = targetCards;
+    }
+
+    public void checkExchange() {
+        if (exchange == null) return;
+        exchange.decreaseCountdown();
+        if (exchange.getCountdown() == 0) {
+            exchange.returnHands();
+            exchange = null;
+        }
     }
 
     @Override
@@ -30,7 +55,7 @@ public abstract class Player {
         for (Card card: cards) {
             sj.add(card.toString());
         }
-        return String.format("{order: %s, name: %s, cards: %s}", this.order.name(), this.name, sj);
+        return String.format("\n{order: %s, name: %15s, cards: %s}", this.order.name(), this.name, sj);
     }
 
     public void sortCard() {
@@ -39,6 +64,21 @@ public abstract class Player {
 
     public enum Order{
         P1(),P2(),P3(),P4()
+    }
+
+    public enum DoExchange {
+        YES(1), NO(0);
+        final int val;
+        DoExchange(int val) {
+            this.val = val;
+        }
+
+        public static DoExchange findByVal(int val) {
+            return Arrays.stream(values())
+                    .filter(doExchange -> doExchange.val == val)
+                    .findFirst()
+                    .orElse(null);
+        }
     }
 
     public Order getOrder() {
@@ -80,6 +120,10 @@ public abstract class Player {
 
     public void setExchangePrivilege(int exchangePrivilege) {
         this.exchangePrivilege = exchangePrivilege;
+    }
+
+    public void decrementExchangePrivilege() {
+        this.exchangePrivilege--;
     }
 
     public Input getInput() {

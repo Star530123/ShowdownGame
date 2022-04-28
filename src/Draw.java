@@ -6,7 +6,8 @@ import java.util.List;
 public class Draw {
 
     public static void drawCard(List<Player> players, Deck deck) {
-        for (int i = 0; i < 13; i++) {
+        int round = deck.getCards().size() / players.size();
+        for (int i = 0; i < round; i++) {
             for (Player player: players) {
                 player.getCards().add(deck.drawCard());
             }
