@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -10,14 +11,11 @@ public class Conclude {
     public static void displayWinnerName(List<Player> players) {
         System.out.println("~~各玩家比分~~");
         List<Player> winners = new ArrayList<>();
-        int maxPoint = 0;
+        players.sort((a, b) -> b.getPoint() - a.getPoint());
+        int maxPoint = players.get(0).getPoint();
         StringJoiner sj = new StringJoiner(", ");
         for (Player player: players) {
-            if (player.getPoint() > maxPoint) {
-                winners = new ArrayList<>();
-                winners.add(player);
-                maxPoint = player.getPoint();
-            } else if (player.getPoint() == maxPoint) {
+            if (player.getPoint() == maxPoint) {
                 winners.add(player);
             }
             sj.add(String.format("%s: %d分", player.getPlayerName(), player.getPoint()));

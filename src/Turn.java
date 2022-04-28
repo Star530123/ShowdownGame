@@ -50,7 +50,7 @@ public class Turn {
         ToolUtil.wait(1000);
     }
 
-    public void useExchange(Player currentPlayer) {
+    private void useExchange(Player currentPlayer) {
         int exchangePrivilege = currentPlayer.getExchangePrivilege();
         if (exchangePrivilege == 0 || currentPlayer.wantToExchangeCard() == Player.DoExchange.NO) return;
         currentPlayer.decrementExchangePrivilege();
@@ -61,7 +61,7 @@ public class Turn {
         currentPlayer.exchangeHands(targetPlayer);
     }
 
-    public void gainPoint(Player player) {
+    private void gainPoint(Player player) {
         System.out.printf("恭喜%s得分 !!!\n", player.getPlayerName());
         player.setPoint(player.getPoint() + 1);
         ToolUtil.wait(1000);
