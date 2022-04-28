@@ -8,7 +8,7 @@ public class Round {
     public static void takeTurns(List<Player> players) {
         int count = 13;
         for (int i = 1; i <= count; i++) {
-            System.out.printf("第%d回合\n", i);
+            System.out.printf("\n☆★☆★☆第%d回合☆★☆★☆\n", i);
             checkExchange(players);
             new Turn(players).execute();
         }

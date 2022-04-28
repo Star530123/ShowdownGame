@@ -36,7 +36,7 @@ public class HumanPlayer extends Player{
                 System.out.print("請輸入你要交換手牌的人選 :");
                 StringJoiner sj = new StringJoiner(",", "(", ")");
                 for (int i = 0; i < players.size(); i++) {
-                    sj.add(String.format("%s玩家請輸入%d", players.get(i).getOrder().name(), i));
+                    sj.add(String.format("%s請輸入%d", players.get(i).getPlayerName(), i));
                 }
                 System.out.println(sj);
                 int index = getInput().enterNumber();
@@ -51,8 +51,10 @@ public class HumanPlayer extends Player{
     public Card show() {
         while (true) {
             try {
-                System.out.printf("請輸入要出的牌 (%s):\n", getCards().toString());
-                System.out.printf("從左至右數1~%d :\n", getCards().size());
+                StringJoiner sj = new StringJoiner(", ","[","]");
+                for (int i = 0; i < getCards().size(); i++) sj.add(String.format("%d: %s", i+1,getCards().get(i)));
+                System.out.printf("請輸入要出的牌(從左至右數1~%d):\n", getCards().size());
+                System.out.println(sj);
                 Integer val = getInput().enterNumber();
                 if (val >= 1 && val <= getCards().size()) return getCards().remove(val - 1);
                 else throw new RuntimeException();

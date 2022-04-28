@@ -33,7 +33,7 @@ public abstract class Player {
     public abstract Card show();
 
     public void exchangeHands(Player player) {
-        System.out.printf("--> 對象為%s玩家\n", player.order.name());
+        System.out.printf("--> 對象為%s\n", player.getPlayerName());
         List<Card> targetCards = player.getCards();
         player.setCards(cards);
         exchange = new Exchange(this, player);
@@ -56,6 +56,10 @@ public abstract class Player {
             sj.add(card.toString());
         }
         return String.format("\n{order: %s, name: %15s, cards: %s}", this.order.name(), this.name, sj);
+    }
+
+    public String getPlayerName() {
+        return String.format("%s玩家 %s", this.order.name(), this.name);
     }
 
     public void sortCard() {

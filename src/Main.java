@@ -9,17 +9,17 @@ public class Main {
         int humanPlayerNumber = 0;
         List<Player> players = initializePlayers(humanPlayerNumber);
         Deck deck = new Deck();
-        System.out.println("遊戲開始!!!!");
-        System.out.println("命名");
+        System.out.println("\n遊戲開始!!!!");
+        System.out.println("各玩家命名時間~~~~");
         GameStart.name(players);
         System.out.println("洗牌");
         deck.shuffle();
-        System.out.println("抽卡階段!!!!");
+        System.out.println("\n抽卡階段!!!!");
         Draw.drawCard(players, deck);
-        System.out.println(players);
-        System.out.println("遊戲回合開始!!!!");
+        System.out.println("\n遊戲回合開始!!!!");
         Round.takeTurns(players);
-
+        System.out.println("\n結算時間!!!!");
+        Conclude.displayWinnerName(players);
     }
 
     private static List<Player> initializePlayers(int humanPlayerNumber) {

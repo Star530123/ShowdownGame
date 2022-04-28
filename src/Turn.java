@@ -44,9 +44,10 @@ public class Turn {
         System.out.print("此回合各玩家出的牌為 : ");
         StringJoiner sj = new StringJoiner(", ");
         for (int i = 0; i < showCards.size(); i++) {
-            sj.add(String.format("%s玩家 %s", players.get(i).getOrder().name(), showCards.get(i).toString()));
+            sj.add(String.format("%s %s", players.get(i).getPlayerName(), showCards.get(i).toString()));
         }
         System.out.println(sj);
+        ToolUtil.wait(1000);
     }
 
     public void useExchange(Player currentPlayer) {
@@ -56,12 +57,13 @@ public class Turn {
         Player targetPlayer = currentPlayer.exchangeCardWith(players.stream()
                 .filter(player -> player.getOrder() != currentPlayer.getOrder())
                 .collect(Collectors.toList()));
-        System.out.printf("%s玩家申請換牌!! ", currentPlayer.getOrder().name());
+        System.out.printf("%s申請換牌!! ", currentPlayer.getPlayerName());
         currentPlayer.exchangeHands(targetPlayer);
     }
 
     public void gainPoint(Player player) {
-        System.out.printf("恭喜%s玩家得分 !!!\n", player.getOrder().name());
+        System.out.printf("恭喜%s得分 !!!\n", player.getPlayerName());
         player.setPoint(player.getPoint() + 1);
+        ToolUtil.wait(1000);
     }
 }
