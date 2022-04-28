@@ -20,11 +20,11 @@ public class Conclude {
             } else if (player.getPoint() == maxPoint) {
                 winners.add(player);
             }
-            sj.add(String.format("%s玩家 %s: %d分", player.getOrder().name(), player.getName(), player.getPoint()));
+            sj.add(String.format("%s: %d分", player.getPlayerName(), player.getPoint()));
         }
         System.out.println(sj);
         sj = new StringJoiner("、");
         for (Player winner: winners) sj.add(winner.getName());
-        System.out.printf("恭喜玩家%s獲得本次的最高分 %d分!!!", sj, maxPoint);
+        System.out.printf("\n恭喜玩家%s獲得本次的最高分 %d分!!!", sj, maxPoint);
     }
 }
