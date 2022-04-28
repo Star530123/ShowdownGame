@@ -14,8 +14,12 @@ public class Main {
         GameStart.name(players);
         System.out.println("洗牌");
         deck.shuffle();
+        //display deck shuffle result
+//        System.out.println(deck.getCards());
         System.out.println("\n抽卡階段!!!!");
         Draw.drawCard(players, deck);
+        //display players' cards
+//        System.out.println(players);
         System.out.println("\n遊戲回合開始!!!!");
         Round.takeTurns(players);
         System.out.println("\n結算時間!!!!");
