@@ -56,8 +56,8 @@ public class HumanPlayer extends Player{
                 System.out.printf("請輸入要出的牌(從左至右數1~%d):\n", getCards().size());
                 System.out.println(sj);
                 Integer val = getInput().enterNumber();
-                if (val >= 1 && val <= getCards().size()) return getCards().remove(val - 1);
-                else throw new RuntimeException();
+                ValidateUtil.integerInterval(val, 1, getCards().size());
+                return getCards().remove(val - 1);
             } catch (Exception e) {
                 System.out.println("請輸入正確的值！");
             }
